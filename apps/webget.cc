@@ -9,6 +9,35 @@ using namespace std;
 
 void get_URL( const string& host, const string& path )
 {
+  Address addr(host, "http");
+  TCPSocket tcpsk;
+  tcpsk.connect(addr);
+  vector<string> buffs;
+  size_t send_sz = 0;
+  buffs.push_back("GET " + string(path) + " HTTP/1.1\r\n");
+  send_sz += buffs.back().size();
+  buffs.push_back("Host: cs144.keithw.org\r\n");
+  send_sz += buffs.back().size();
+  buffs.push_back("Connection: close\r\n");
+  send_sz += buffs.back().size();
+  buffs.push_back("\r\n");
+  send_sz += buffs.back().size();
+  size_t ret = tcpsk.write(buffs);
+  if (ret != send_sz) {
+    cerr << "tcp socket error" << endl;
+  }
+  // cout << "tcpsk write " << ret << endl;
+  string content;
+  string hash_str;
+  while (1) {
+    tcpsk.read(content);
+    if (content.size() == 0) { break; }
+    if (content.size() == 1) {
+      hash_str = hash_str + content;
+    }
+  }
+  cout << hash_str ;
+  tcpsk.close();
   cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
   cerr << "Warning: get_URL() has not been implemented yet.\n";
 }
