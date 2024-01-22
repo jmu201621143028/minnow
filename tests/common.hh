@@ -9,11 +9,13 @@
 #include <typeinfo>
 #include <utility>
 #include <vector>
+#include <iostream>
+
 
 class ExpectationViolation : public std::runtime_error
 {
 public:
-  static constexpr std::string boolstr( bool b ) { return b ? "true" : "false"; }
+  static std::string boolstr( bool b ) { return b ? "true" : "false"; }
 
   explicit ExpectationViolation( const std::string& msg ) : std::runtime_error( msg ) {}
 
@@ -134,6 +136,7 @@ struct ExpectNumber : public Expectation<T>
   virtual Num value( T& ) const = 0;
   void execute( T& obj ) const override
   {
+    // std::cout << "[debug]"<< value( obj ) << std::endl;
     const Num result { value( obj ) };
     if ( result != value_ ) {
       throw ExpectationViolation { name(), value_, result };
