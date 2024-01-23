@@ -101,7 +101,7 @@ int main()
     {
       ReassemblerTestHarness test { "insert last beyond capacity", 2 };
 
-      test.execute( Insert { "bc", 1 }.is_last() );
+      test.execute( Insert { "bc", 1 }.is_last(false) );
       test.execute( BytesPushed( 0 ) );
       test.execute( BytesPending( 1 ) );
 
