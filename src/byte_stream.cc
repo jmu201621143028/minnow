@@ -35,6 +35,10 @@ void Writer::close()
   is_closed_ = true;
 }
 
+void Writer::has_remain(bool has_remain)
+{
+  has_remain_ = has_remain;
+}
 uint64_t Writer::available_capacity() const
 {
   // Your code here.
@@ -50,7 +54,7 @@ uint64_t Writer::bytes_pushed() const
 bool Reader::is_finished() const
 {
   // Your code here.
-  return is_closed_ && byte_buff_.size() == 0;
+  return is_closed_ && byte_buff_.size() == 0 && !has_remain_;
 }
 
 uint64_t Reader::bytes_popped() const

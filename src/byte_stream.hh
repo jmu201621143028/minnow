@@ -29,6 +29,7 @@ protected:
   std::string byte_buff_{};
   uint64_t num_bytes_pushed_ = 0;
   uint64_t num_bytes_poped_ = 0;
+  bool has_remain_ = false;
 };
 
 class Writer : public ByteStream
@@ -36,6 +37,7 @@ class Writer : public ByteStream
 public:
   void push( std::string data ); // Push data to stream, but only as much as available capacity allows.
   void close();                  // Signal that the stream has reached its ending. Nothing more will be written.
+  void has_remain(bool has_remain);
 
   bool is_closed() const;              // Has the stream been closed?
   uint64_t available_capacity() const; // How many bytes can be pushed to the stream right now?
