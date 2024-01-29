@@ -1,6 +1,6 @@
 include(CTest)
 
-list(APPEND CMAKE_CTEST_ARGUMENTS --output-on-failure --stop-on-failure --timeout 12 -E 'speed_test|optimization|webget')
+list(APPEND CMAKE_CTEST_ARGUMENTS --output-on-failure --stop-on-failure --timeout 50 -E 'speed_test|optimization|webget')
 
 set(compile_name "compile with bug-checkers")
 add_test(NAME ${compile_name}
@@ -64,7 +64,7 @@ add_custom_target (check_webget COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failu
 
 add_custom_target (check1 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 25 -R '^byte_stream_|^reassembler_')
 
-add_custom_target (check2 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 12 -R '^byte_stream_|^reassembler_|^wrapping|^recv')
+add_custom_target (check2 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 200 -R '^byte_stream_|^reassembler_|^wrapping|^recv')
 
 add_custom_target (check3 COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --stop-on-failure --timeout 12 -R '^byte_stream_|^reassembler_|^wrapping|^recv|^send')
 

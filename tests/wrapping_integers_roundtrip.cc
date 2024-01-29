@@ -37,13 +37,21 @@ int main()
       const uint64_t val { dist63( rd ) };
       const uint64_t offset { dist31minus1( rd ) };
 
+      // std::cout << 1 << std::endl;
       check_roundtrip( isn, val, val );
+      // std::cout << 2 << std::endl;
       check_roundtrip( isn, val + 1, val );
+      // std::cout << 3 << std::endl;
       check_roundtrip( isn, val - 1, val );
+      // std::cout << 4 << std::endl;
       check_roundtrip( isn, val + offset, val );
+      // std::cout << 5 << std::endl;
       check_roundtrip( isn, val - offset, val );
+      // std::cout << 6 << std::endl;
       check_roundtrip( isn, val + big_offset, val );
+      // std::cout << 7 << std::endl;
       check_roundtrip( isn, val - big_offset, val );
+      // std::cout << 8 << std::endl;
     }
   } catch ( const exception& e ) {
     cerr << e.what() << endl;
